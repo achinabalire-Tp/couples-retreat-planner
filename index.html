@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Couples Retreat Planner — AI-Powered Escapes for Two</title>
+  <meta name="description" content="Let AI plan your perfect couples retreat — hot springs, hiking, gardens, cozy cabins, and more. Free and paid activities tailored to where you are." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <span class="logo-icon">♡</span>
+        <span class="logo-text">CouplesEscape</span>
+      </div>
+      <div class="nav-links">
+        <a href="#planner">Plan a Trip</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#" class="nav-cta">Get Started Free</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-tag">✨ AI-Powered Retreat Planning</div>
+      <h1 class="hero-title">Your Perfect Escape,<br /><em>Planned in Seconds</em></h1>
+      <p class="hero-sub">Tell us where you are and what you love — we'll craft a romantic itinerary with free finds, hidden gems, hot springs, cozy stays, and everything in between.</p>
+      <a href="#planner" class="hero-btn">Plan Our Retreat →</a>
+    </div>
+    <div class="hero-cards">
+      <div class="float-card fc1">♨️ Hot Springs<br/><small>Scenic & secluded</small></div>
+      <div class="float-card fc2">🌸 Gardens<br/><small>Free admission</small></div>
+      <div class="float-card fc3">🪵 Cozy Cabins<br/><small>From $89/night</small></div>
+      <div class="float-card fc4">🥾 Hiking<br/><small>Trail for two</small></div>
+    </div>
+  </section>
+
+  <!-- PLANNER SECTION -->
+  <section class="planner-section" id="planner">
+    <div class="container">
+      <div class="section-label">Start Planning</div>
+      <h2 class="section-title">Where Are You Escaping To?</h2>
+
+      <div class="planner-card">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Your location</label>
+            <input id="location" type="text" class="form-input" placeholder="e.g. Portland, OR" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Destination (optional)</label>
+            <input id="destination" type="text" class="form-input" placeholder="e.g. Bend, OR" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Trip length</label>
+            <select id="trip-type" class="form-input">
+              <option value="day">Day trip</option>
+              <option value="weekend" selected>Weekend getaway</option>
+              <option value="week">Week-long retreat</option>
+              <option value="local">Stay local</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Budget per person</label>
+            <select id="budget" class="form-input">
+              <option value="free">Free / low cost</option>
+              <option value="moderate" selected>Moderate ($50–150/day)</option>
+              <option value="splurge">Splurge ($150–300/day)</option>
+              <option value="luxury">Luxury ($300+/day)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom:1rem">
+          <label class="form-label">What you love</label>
+          <div class="interests-grid" id="interests-grid">
+            <div class="chip" data-val="hot springs">♨️ Hot Springs</div>
+            <div class="chip" data-val="hiking">🥾 Hiking</div>
+            <div class="chip" data-val="gardens & nature">🌸 Gardens</div>
+            <div class="chip" data-val="water & lakes">🏞️ Water & Lakes</div>
+            <div class="chip" data-val="art & museums">🎨 Art & Museums</div>
+            <div class="chip" data-val="food & wine">🍷 Food & Wine</div>
+            <div class="chip" data-val="spa & wellness">🧖 Spa & Wellness</div>
+            <div class="chip" data-val="stargazing">🌙 Stargazing</div>
+            <div class="chip" data-val="scenic drives">🚗 Scenic Drives</div>
+            <div class="chip" data-val="cozy cabins">🪵 Cozy Cabins</div>
+            <div class="chip" data-val="farmers markets">🥬 Farmers Markets</div>
+            <div class="chip" data-val="photography">📷 Photography</div>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom:1.5rem">
+          <label class="form-label">Anything else? (occasion, mobility needs, vibes…)</label>
+          <textarea id="extra" class="form-input form-textarea" placeholder="e.g. anniversary trip, we love slow mornings, prefer crowd-free spots"></textarea>
+        </div>
+
+        <button class="plan-btn" id="plan-btn" onclick="planRetreat()">✨ Plan Our Retreat</button>
+      </div>
+
+      <!-- RESULTS -->
+      <div id="results-section" class="results-section hidden">
+        <div class="tabs" id="tabs">
+          <button class="tab active" onclick="switchTab('itinerary',this)">Itinerary</button>
+          <button class="tab" onclick="switchTab('activities',this)">Activities</button>
+          <button class="tab" onclick="switchTab('stays',this)">Places to Stay</button>
+          <button class="tab" onclick="switchTab('tips',this)">Local Tips</button>
+        </div>
+        <div id="results-content" class="results-content"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing-section" id="pricing">
+    <div class="container">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">Choose Your Adventure</h2>
+      <p class="section-sub">Start free. Upgrade when you're ready for more.</p>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-badge free-badge">Free</div>
+          <div class="pricing-name">Explorer</div>
+          <div class="pricing-price">$0</div>
+          <div class="pricing-period">forever free</div>
+          <ul class="pricing-features">
+            <li>✓ 3 retreat plans/month</li>
+            <li>✓ Basic activity ideas</li>
+            <li>✓ Local suggestions</li>
+          </ul>
+          <a href="#planner" class="pricing-btn outline-btn">Start Free</a>
+        </div>
+        <div class="pricing-card featured-card">
+          <div class="pricing-badge pro-badge">Most Popular</div>
+          <div class="pricing-name">Couples Pro</div>
+          <div class="pricing-price">$9<span>/mo</span></div>
+          <div class="pricing-period">or $79/year — save 27%</div>
+          <ul class="pricing-features">
+            <li>✓ Unlimited retreat plans</li>
+            <li>✓ Full itineraries + stays</li>
+            <li>✓ Save & export plans</li>
+            <li>✓ Budget tracker</li>
+            <li>✓ PDF download</li>
+          </ul>
+          <a href="#" class="pricing-btn solid-btn">Get Couples Pro</a>
+        </div>
+        <div class="pricing-card adventure-card">
+          <div class="pricing-badge adv-badge">Ultimate</div>
+          <div class="pricing-name">Max Adventures</div>
+          <div class="pricing-price">$19<span>/mo</span></div>
+          <div class="pricing-period">or $149/year — save 34%</div>
+          <ul class="pricing-features">
+            <li>✓ Everything in Pro</li>
+            <li>✓ AI adventure concierge</li>
+            <li>✓ Off-the-beaten-path gems</li>
+            <li>✓ Multi-destination builder</li>
+            <li>✓ Exclusive deals & discounts</li>
+            <li>✓ Priority new features</li>
+          </ul>
+          <a href="#" class="pricing-btn adv-btn">Go Max Adventures</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <span class="logo-icon">♡</span>
+        <span class="logo-text">CouplesEscape</span>
+      </div>
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer-copy">© 2026 CouplesEscape. Made with love.</div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
