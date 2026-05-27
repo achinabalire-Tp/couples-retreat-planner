@@ -117,10 +117,10 @@ Budget: ${budget}
 Interests: ${interests.length?interests.join(', '):'general outdoor and romantic activities'}
 Extra notes: ${extra||'none'}
 
-Return ONLY valid JSON with this exact structure (no markdown, no backticks):
+Return ONLY a raw JSON object. No explanation, no markdown, no code blocks. Start with { and end with }. Use this structure:
 {"itinerary":[{"day_title":"string","date_label":"string","vibe":"string","schedule":[{"time":"string","activity":"string"}],"tip":"string"}],"activities":[{"name":"string","emoji":"string","category":"string","location":"string","description":"string","cost":"free or paid","price_low":0,"price_high":50,"why_couples":"string"}],"stays":[{"name":"string","type":"string","description":"string","price_range":"string","highlights":"string","best_for":"string"}],"local_tips":[{"title":"string","detail":"string"}],"cost_summary":[{"label":"string","value":"string"}]}
 
-Make ALL recommendations REAL and SPECIFIC to the location. Include 3 itinerary days, 6 activities, 3 stays, 5 local tips.`;
+Use REAL place names specific to the location. Include 3 itinerary days, 6 activities, 3 stays, 5 local tips.`;
 
   try {
     const resp = await fetch('/api/plan', {
@@ -142,7 +142,7 @@ Make ALL recommendations REAL and SPECIFIC to the location. Include 3 itinerary 
     const fullText = (data.content||[]).map(b=>b.type==='text'?b.text:'').join('');
     const clean = fullText.replace(/```json|```/g,'').trim();
     const jsonMatch = clean.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) throw new Error('No JSON found in response');
+    if (!jsonMatch) throw new Error('No JSON found in response: ' + fullText.substring(0,200));
     lastData = JSON.parse(jsonMatch[0]);
     content.innerHTML = '';
     renderItinerary(content, lastData);
