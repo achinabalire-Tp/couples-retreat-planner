@@ -1,8 +1,5 @@
 {
-  "functions": {
-    "api/plan.js": {
-      "memory": 128,
-      "maxDuration": 30
-    }
-  }
+  "rewrites": [
+    { "source": "/api/plan", "destination": "/api/plan.js" }
+  ]
 }
