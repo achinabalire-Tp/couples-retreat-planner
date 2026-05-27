@@ -236,17 +236,7 @@ Return ONLY valid JSON (no markdown, no backticks) with this exact structure:
 Make recommendations REAL and SPECIFIC to the actual location. Include real place names, actual hot springs, real parks, real restaurants. Mix free and paid options. Be romantic, specific, and genuinely helpful. Include 3 itinerary days (or 1 for day trip), 6 activities, 3 stays, 5 local tips.`;
 
   try {
-const resp = await fetch('/api/plan', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }]
-      })
-    });
-
-    const resp2 = resp;
+    const resp = await fetch('/api/plan', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
